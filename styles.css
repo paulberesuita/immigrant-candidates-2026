@@ -146,9 +146,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-    background: var(--primary);
+    background-color: rgba(99, 102, 241, 1);
     color: var(--white);
-    border-color: var(--primary);
+    border-color: rgba(99, 102, 241, 1);
 }
 
 .btn-primary:hover {
