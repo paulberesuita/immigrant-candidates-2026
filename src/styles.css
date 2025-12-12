@@ -4,10 +4,10 @@
 
 /* Custom CSS Variables - Color Tokens */
 :root {
-  /* Primary Colors - Deep Vibrant Blue */
-  --color-primary: #2563EB;        /* blue-600 - main brand */
-  --color-primary-dark: #1D4ED8;   /* blue-700 - hover/dark */
-  --color-primary-light: #3B82F6;  /* blue-500 - lighter variant */
+  /* Primary Colors - Deep Navy Blue */
+  --color-primary: #27388E;        /* deep navy - main brand */
+  --color-primary-dark: #1E2C6E;   /* darker navy - hover/dark */
+  --color-primary-light: #3A4FA8;  /* lighter navy variant */
 
   /* Neutral Colors - Warm Stone */
   --color-neutral-50: #FAFAF9;    /* stone-50 */
@@ -17,12 +17,12 @@
   --color-neutral-700: #44403C;   /* stone-700 */
   --color-neutral-900: #1C1917;   /* stone-900 */
 
-  /* Accent Colors - Blue (monochromatic) */
-  --color-accent: #2563EB;        /* blue-600 */
-  --color-accent-light: #93C5FD;  /* blue-300 - for highlights */
+  /* Accent Colors - Navy (monochromatic) */
+  --color-accent: #27388E;        /* deep navy */
+  --color-accent-light: #7A8BC4;  /* light navy - for highlights */
 
   /* Party Colors */
-  --color-party-d: #2563EB;       /* blue-600 - Democratic */
+  --color-party-d: #27388E;       /* deep navy - Democratic */
   --color-party-r: #DC2626;       /* red-600 - Republican */
   --color-party-i: #6B7280;       /* gray-500 - Independent */
 
@@ -30,8 +30,8 @@
   --color-white: #FFFFFF;
   --color-black: #000000;
 
-  /* Hero Background (deep vibrant blue) */
-  --color-hero-bg: #2563EB;
+  /* Hero Background (deep navy blue) */
+  --color-hero-bg: #27388E;
 
   /* Spacing */
   --section-padding: 100px;
@@ -118,12 +118,12 @@
   }
 
   .btn-primary {
-    @apply text-white border-blue-600;
+    @apply text-white border-navy-600;
     background-color: var(--color-primary-dark);
   }
 
   .btn-primary:hover {
-    @apply border-blue-700;
+    @apply border-navy-700;
     background-color: var(--color-primary-dark);
   }
 
@@ -146,11 +146,11 @@
   }
 
   .btn-accent {
-    @apply bg-blue-600 text-white border-blue-600 font-bold;
+    @apply bg-navy-600 text-white border-navy-600 font-bold;
   }
 
   .btn-accent:hover {
-    @apply bg-blue-700 border-blue-700;
+    @apply bg-navy-700 border-navy-700;
   }
 
   .btn-nav {
@@ -181,7 +181,7 @@
   }
 
   .logo-icon {
-    @apply text-[28px] text-blue-200;
+    @apply text-[28px] text-navy-200;
   }
 
   .logo-text {
@@ -193,7 +193,7 @@
   }
 
   .logo-year {
-    @apply text-[11px] font-bold tracking-widest text-blue-200;
+    @apply text-[11px] font-bold tracking-widest text-navy-200;
   }
 
   .navbar.scrolled .logo-main {
@@ -209,7 +209,7 @@
   }
 
   .nav-link:not(.btn-nav):hover {
-    @apply text-blue-200;
+    @apply text-navy-200;
   }
 
   .navbar.scrolled .nav-link:not(.btn-nav) {
@@ -234,7 +234,7 @@
 
   /* Hero Section */
   .hero {
-    @apply relative min-h-screen flex items-center justify-center bg-blue-600 border border-black overflow-hidden pt-[120px] px-6 pb-20;
+    @apply relative min-h-screen flex items-center justify-center bg-navy-600 border border-black overflow-hidden pt-[120px] px-6 pb-20;
   }
 
   .hero-bg {
@@ -254,7 +254,7 @@
   }
 
   .hero-title .highlight {
-    @apply text-blue-100;
+    @apply text-navy-100;
   }
 
   .hero-description {
@@ -307,7 +307,7 @@
   }
 
   .feature-icon {
-    @apply w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0;
+    @apply w-12 h-12 bg-navy-600 rounded-xl flex items-center justify-center flex-shrink-0;
   }
 
   .feature-icon svg {
@@ -340,11 +340,11 @@
   }
 
   .filter-btn:hover {
-    @apply border-blue-600 text-blue-600;
+    @apply border-navy-600 text-navy-600;
   }
 
   .filter-btn.active {
-    @apply bg-blue-600 border-blue-600 text-white;
+    @apply bg-navy-600 border-navy-600 text-white;
   }
 
   .search-box {
@@ -360,7 +360,7 @@
   }
 
   .search-box input:focus {
-    @apply outline-none border-blue-600;
+    @apply outline-none border-navy-600;
   }
 
   .search-box input::placeholder {
@@ -461,7 +461,7 @@
   }
 
   .candidate-card:hover {
-    @apply border-blue-600 -translate-y-0.5;
+    @apply border-navy-600 -translate-y-0.5;
   }
 
   .card-header {
@@ -469,7 +469,7 @@
   }
 
   .candidate-photo {
-    @apply w-[100px] h-[100px] rounded-full bg-blue-600 flex items-center justify-center mb-4 overflow-hidden relative;
+    @apply w-[100px] h-[100px] rounded-full bg-navy-600 flex items-center justify-center mb-4 overflow-hidden relative;
   }
 
   .candidate-photo img.candidate-image {
@@ -481,7 +481,7 @@
   }
 
   .candidate-badge {
-    @apply absolute top-4 right-4 py-1.5 px-3 bg-stone-100 rounded-full text-[11px] font-semibold text-blue-600 uppercase tracking-wide;
+    @apply absolute top-4 right-4 py-1.5 px-3 bg-stone-100 rounded-full text-[11px] font-semibold text-navy-600 uppercase tracking-wide;
   }
 
   .card-body {
@@ -505,7 +505,7 @@
   }
 
   .party-badge.party-d {
-    @apply bg-blue-600 text-white;
+    @apply bg-navy-600 text-white;
   }
 
   .party-badge.party-r {
@@ -521,7 +521,7 @@
   }
 
   .status-badge.status-incumbent {
-    @apply bg-blue-600 text-white;
+    @apply bg-navy-600 text-white;
   }
 
   .candidate-meta {
@@ -534,7 +534,7 @@
   }
 
   .candidate-endorsements {
-    @apply text-[13px] text-stone-700 mt-3 p-3 bg-stone-50 rounded-lg border-l-4 border-blue-600;
+    @apply text-[13px] text-stone-700 mt-3 p-3 bg-stone-50 rounded-lg border-l-4 border-navy-600;
   }
 
   .candidate-endorsements strong {
@@ -578,7 +578,7 @@
   }
 
   .social-link:hover {
-    @apply bg-blue-600 text-white;
+    @apply bg-navy-600 text-white;
   }
 
   .no-results {
@@ -615,7 +615,7 @@
   }
 
   .impact-number {
-    @apply font-heading text-[42px] font-bold text-blue-600 leading-none mb-2 tracking-tight;
+    @apply font-heading text-[42px] font-bold text-navy-600 leading-none mb-2 tracking-tight;
   }
 
   .impact-label {
@@ -652,7 +652,7 @@
   }
 
   .form-row input:focus {
-    @apply outline-2 outline-blue-600 outline-offset-2;
+    @apply outline-2 outline-navy-600 outline-offset-2;
   }
 
   .form-note {
@@ -685,7 +685,7 @@
   }
 
   .footer-nav a:hover {
-    @apply text-blue-300;
+    @apply text-navy-300;
   }
 
   .footer-bottom {
@@ -748,11 +748,11 @@
   }
 
   .modal-photo-placeholder {
-    @apply bg-blue-600 text-white flex items-center justify-center text-5xl font-bold;
+    @apply bg-navy-600 text-white flex items-center justify-center text-5xl font-bold;
   }
 
   .modal-badge {
-    @apply absolute bottom-0 right-0 bg-blue-600 text-white py-1.5 px-3 rounded-full text-xs font-semibold shadow-lg;
+    @apply absolute bottom-0 right-0 bg-navy-600 text-white py-1.5 px-3 rounded-full text-xs font-semibold shadow-lg;
   }
 
   .modal-title-section {
@@ -784,7 +784,7 @@
   }
 
   .modal-section-title {
-    @apply text-xl font-bold mb-4 text-stone-900 border-b-2 border-blue-600 pb-2;
+    @apply text-xl font-bold mb-4 text-stone-900 border-b-2 border-navy-600 pb-2;
   }
 
   .modal-info-grid {
@@ -824,7 +824,7 @@
   }
 
   .modal-social-link:hover {
-    @apply bg-blue-600 text-white -translate-y-0.5;
+    @apply bg-navy-600 text-white -translate-y-0.5;
   }
 
   .modal-website-btn {
