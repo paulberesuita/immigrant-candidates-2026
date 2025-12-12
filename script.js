@@ -249,9 +249,6 @@ function createCandidateCard(candidate) {
         : '';
     const placeholderHTML = `<span class="photo-placeholder" ${candidate.image_url && candidate.image_url.trim() ? 'style="display: none;"' : ''}>${initials}</span>`;
 
-    // Parse key issues
-    const issues = candidate.key_issues ? candidate.key_issues.split(',').map(i => i.trim()).slice(0, 3) : [];
-
     // Format office type badge
     let badgeText = candidate.office_type || 'Candidate';
     if (candidate.office_level === 'federal') {
@@ -338,7 +335,6 @@ function createCandidateCard(candidate) {
             </p>
             ${metaInfo ? `<p class="candidate-meta">${metaInfo}</p>` : ''}
             <p class="candidate-bio">${bioText}</p>
-            ${issues.length > 0 ? `<div class="candidate-issues">${issues.map(issue => `<span class="issue-tag">${issue}</span>`).join('')}</div>` : ''}
         </div>
         <div class="card-footer">
             <div class="social-links">
