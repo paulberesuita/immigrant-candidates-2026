@@ -4,10 +4,10 @@
 
 /* Custom CSS Variables - Color Tokens */
 :root {
-  /* Primary Colors - Indigo */
-  --color-primary: #4F46E5;        /* indigo-600 */
-  --color-primary-dark: #4338CA;  /* indigo-700 */
-  --color-primary-light: #6366F1; /* indigo-500 */
+  /* Primary Colors - Vibrant Blue */
+  --color-primary: #3B82F6;        /* blue-500 */
+  --color-primary-dark: #2563EB;  /* blue-600 */
+  --color-primary-light: #60A5FA; /* blue-400 */
 
   /* Neutral Colors - Slate */
   --color-neutral-50: #F8FAFC;    /* slate-50 */
@@ -17,9 +17,9 @@
   --color-neutral-700: #334155;   /* slate-700 */
   --color-neutral-900: #0F172A;   /* slate-900 */
 
-  /* Accent Colors - Amber */
-  --color-accent: #F59E0B;        /* amber-500 */
-  --color-accent-light: #FBBF24;  /* amber-400 */
+  /* Accent Colors - Blue (monochromatic) */
+  --color-accent: #3B82F6;        /* blue-500 */
+  --color-accent-light: #60A5FA;  /* blue-400 */
 
   /* Party Colors */
   --color-party-d: #2563EB;       /* blue-600 - Democratic */
@@ -30,8 +30,8 @@
   --color-white: #FFFFFF;
   --color-black: #000000;
 
-  /* Hero Background (custom blue) */
-  --color-hero-bg: rgba(0, 52, 173, 1);
+  /* Hero Background (vibrant blue) */
+  --color-hero-bg: #3B82F6;
 
   /* Spacing */
   --section-padding: 100px;
@@ -118,12 +118,12 @@
   }
 
   .btn-primary {
-    @apply text-white border-indigo-600;
+    @apply text-white border-blue-600;
     background-color: var(--color-primary-dark);
   }
 
   .btn-primary:hover {
-    @apply border-indigo-700;
+    @apply border-blue-700;
     background-color: var(--color-primary-dark);
   }
 
@@ -146,11 +146,11 @@
   }
 
   .btn-accent {
-    @apply bg-amber-500 text-slate-900 border-amber-500 font-bold;
+    @apply bg-blue-600 text-white border-blue-600 font-bold;
   }
 
   .btn-accent:hover {
-    @apply bg-amber-400 border-amber-400;
+    @apply bg-blue-700 border-blue-700;
   }
 
   .btn-nav {
@@ -181,7 +181,7 @@
   }
 
   .logo-icon {
-    @apply text-[28px] text-amber-500;
+    @apply text-[28px] text-blue-400;
   }
 
   .logo-text {
@@ -193,7 +193,7 @@
   }
 
   .logo-year {
-    @apply text-[11px] font-bold tracking-widest text-amber-500;
+    @apply text-[11px] font-bold tracking-widest text-blue-400;
   }
 
   .navbar.scrolled .logo-main {
@@ -209,7 +209,7 @@
   }
 
   .nav-link:not(.btn-nav):hover {
-    @apply text-amber-500;
+    @apply text-blue-400;
   }
 
   .navbar.scrolled .nav-link:not(.btn-nav) {
@@ -234,7 +234,7 @@
 
   /* Hero Section */
   .hero {
-    @apply relative min-h-screen flex items-center justify-center bg-[rgba(0,52,173,1)] border border-black overflow-hidden pt-[120px] px-6 pb-20;
+    @apply relative min-h-screen flex items-center justify-center bg-blue-500 border border-black overflow-hidden pt-[120px] px-6 pb-20;
   }
 
   .hero-bg {
@@ -246,7 +246,7 @@
   }
 
   .hero-badge {
-    @apply inline-block py-2 px-5 bg-white/10 border border-white/20 rounded-full text-[13px] font-semibold text-amber-500 tracking-wide mb-6;
+    @apply inline-block py-2 px-5 bg-white/10 border border-white/20 rounded-full text-[13px] font-semibold text-white tracking-wide mb-6;
   }
 
   .hero-title {
@@ -254,7 +254,7 @@
   }
 
   .hero-title .highlight {
-    @apply text-amber-500;
+    @apply text-blue-200;
   }
 
   .hero-description {
@@ -307,7 +307,7 @@
   }
 
   .feature-icon {
-    @apply w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0;
+    @apply w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0;
   }
 
   .feature-icon svg {
@@ -340,11 +340,11 @@
   }
 
   .filter-btn:hover {
-    @apply border-indigo-600 text-indigo-600;
+    @apply border-blue-500 text-blue-500;
   }
 
   .filter-btn.active {
-    @apply bg-indigo-600 border-indigo-600 text-white;
+    @apply bg-blue-500 border-blue-500 text-white;
   }
 
   .search-box {
@@ -360,7 +360,7 @@
   }
 
   .search-box input:focus {
-    @apply outline-none border-indigo-600;
+    @apply outline-none border-blue-500;
   }
 
   .search-box input::placeholder {
@@ -461,7 +461,7 @@
   }
 
   .candidate-card:hover {
-    @apply border-indigo-600 -translate-y-0.5;
+    @apply border-blue-500 -translate-y-0.5;
   }
 
   .card-header {
@@ -469,7 +469,7 @@
   }
 
   .candidate-photo {
-    @apply w-[100px] h-[100px] rounded-full bg-indigo-600 flex items-center justify-center mb-4 overflow-hidden relative;
+    @apply w-[100px] h-[100px] rounded-full bg-blue-500 flex items-center justify-center mb-4 overflow-hidden relative;
   }
 
   .candidate-photo img.candidate-image {
@@ -481,7 +481,7 @@
   }
 
   .candidate-badge {
-    @apply absolute top-4 right-4 py-1.5 px-3 bg-slate-50 rounded-full text-[11px] font-semibold text-indigo-600 uppercase tracking-wide;
+    @apply absolute top-4 right-4 py-1.5 px-3 bg-slate-50 rounded-full text-[11px] font-semibold text-blue-500 uppercase tracking-wide;
   }
 
   .card-body {
@@ -521,7 +521,7 @@
   }
 
   .status-badge.status-incumbent {
-    @apply bg-amber-400 text-white;
+    @apply bg-blue-500 text-white;
   }
 
   .candidate-meta {
@@ -534,7 +534,7 @@
   }
 
   .candidate-endorsements {
-    @apply text-[13px] text-slate-700 mt-3 p-3 bg-slate-50 rounded-lg border-l-4 border-indigo-600;
+    @apply text-[13px] text-slate-700 mt-3 p-3 bg-slate-50 rounded-lg border-l-4 border-blue-500;
   }
 
   .candidate-endorsements strong {
@@ -578,7 +578,7 @@
   }
 
   .social-link:hover {
-    @apply bg-indigo-600 text-white;
+    @apply bg-blue-500 text-white;
   }
 
   .no-results {
@@ -615,7 +615,7 @@
   }
 
   .impact-number {
-    @apply font-heading text-[42px] font-bold text-indigo-600 leading-none mb-2 tracking-tight;
+    @apply font-heading text-[42px] font-bold text-blue-500 leading-none mb-2 tracking-tight;
   }
 
   .impact-label {
@@ -652,7 +652,7 @@
   }
 
   .form-row input:focus {
-    @apply outline-2 outline-amber-500 outline-offset-2;
+    @apply outline-2 outline-blue-500 outline-offset-2;
   }
 
   .form-note {
@@ -685,7 +685,7 @@
   }
 
   .footer-nav a:hover {
-    @apply text-amber-500;
+    @apply text-blue-400;
   }
 
   .footer-bottom {
@@ -748,11 +748,11 @@
   }
 
   .modal-photo-placeholder {
-    @apply bg-indigo-600 text-white flex items-center justify-center text-5xl font-bold;
+    @apply bg-blue-500 text-white flex items-center justify-center text-5xl font-bold;
   }
 
   .modal-badge {
-    @apply absolute bottom-0 right-0 bg-indigo-600 text-white py-1.5 px-3 rounded-full text-xs font-semibold shadow-lg;
+    @apply absolute bottom-0 right-0 bg-blue-500 text-white py-1.5 px-3 rounded-full text-xs font-semibold shadow-lg;
   }
 
   .modal-title-section {
@@ -784,7 +784,7 @@
   }
 
   .modal-section-title {
-    @apply text-xl font-bold mb-4 text-slate-900 border-b-2 border-indigo-600 pb-2;
+    @apply text-xl font-bold mb-4 text-slate-900 border-b-2 border-blue-500 pb-2;
   }
 
   .modal-info-grid {
@@ -824,7 +824,7 @@
   }
 
   .modal-social-link:hover {
-    @apply bg-indigo-600 text-white -translate-y-0.5;
+    @apply bg-blue-500 text-white -translate-y-0.5;
   }
 
   .modal-website-btn {
