@@ -1,0 +1,12 @@
+{
+  "name": "latino-leaders-2026",
+  "version": "1.0.0",
+  "description": "Directory of young Latino candidates running for office",
+  "scripts": {
+    "dev": "wrangler pages dev . --port 3000",
+    "deploy": "wrangler pages deploy . --project-name latino-leaders-2026"
+  },
+  "devDependencies": {
+    "wrangler": "^4.54.0"
+  }
+}

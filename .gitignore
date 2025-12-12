@@ -1,0 +1,15 @@
+## OS / Editor
+.DS_Store
+
+## Node
+node_modules/
+
+## Cloudflare Wrangler / Miniflare state
+.wrangler/
+
+## Local D1/SQLite artifacts
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+
