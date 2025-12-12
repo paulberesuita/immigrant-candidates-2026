@@ -2,8 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS Variables - mapped to Tailwind colors */
+/* Custom CSS Variables - Color Tokens */
 :root {
+  /* Primary Colors - Indigo */
+  --color-primary: #4F46E5;        /* indigo-600 */
+  --color-primary-dark: #4338CA;  /* indigo-700 */
+  --color-primary-light: #6366F1; /* indigo-500 */
+
+  /* Neutral Colors - Slate */
+  --color-neutral-50: #F8FAFC;    /* slate-50 */
+  --color-neutral-100: #F1F5F9;   /* slate-100 */
+  --color-neutral-200: #E2E8F0;   /* slate-200 */
+  --color-neutral-500: #64748B;   /* slate-500 */
+  --color-neutral-700: #334155;   /* slate-700 */
+  --color-neutral-900: #0F172A;   /* slate-900 */
+
+  /* Accent Colors - Amber */
+  --color-accent: #F59E0B;        /* amber-500 */
+  --color-accent-light: #FBBF24;  /* amber-400 */
+
+  /* Party Colors */
+  --color-party-d: #2563EB;       /* blue-600 - Democratic */
+  --color-party-r: #DC2626;       /* red-600 - Republican */
+  --color-party-i: #6B7280;       /* gray-500 - Independent */
+
+  /* Base Colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  /* Hero Background (custom blue) */
+  --color-hero-bg: rgba(0, 52, 173, 1);
+
   /* Spacing */
   --section-padding: 100px;
   --container-width: 1280px;
@@ -59,11 +88,12 @@
   }
 
   .section-label {
-    @apply inline-block text-xs font-bold tracking-widest uppercase text-indigo-600 mb-3;
+    @apply inline-block text-xs font-bold tracking-widest uppercase mb-3;
+    color: var(--color-primary);
   }
 
   .section-label-light {
-    @apply text-amber-500;
+    color: var(--color-accent);
   }
 
   .section-title {
@@ -88,11 +118,13 @@
   }
 
   .btn-primary {
-    @apply bg-slate-900 text-white border-indigo-600;
+    @apply text-white border-indigo-600;
+    background-color: var(--color-primary-dark);
   }
 
   .btn-primary:hover {
-    @apply bg-indigo-700 border-indigo-700;
+    @apply border-indigo-700;
+    background-color: var(--color-primary-dark);
   }
 
   .btn-outline {
@@ -100,15 +132,17 @@
   }
 
   .btn-outline:hover {
-    @apply bg-white text-indigo-600 border-white;
+    @apply bg-white border-white;
+    color: var(--color-primary);
   }
 
   .btn-card {
-    @apply bg-indigo-600 text-white py-2.5 px-5 text-[13px] rounded-lg;
+    @apply text-white py-2.5 px-5 text-[13px] rounded-lg;
+    background-color: var(--color-primary);
   }
 
   .btn-card:hover {
-    @apply bg-indigo-700;
+    background-color: var(--color-primary-dark);
   }
 
   .btn-accent {
@@ -120,12 +154,13 @@
   }
 
   .btn-nav {
-    @apply bg-indigo-600 text-white py-2.5 px-6 rounded-full;
+    @apply text-white py-2.5 px-6 rounded-full;
+    background-color: var(--color-primary);
     color: white !important;
   }
 
   .btn-nav:hover {
-    @apply bg-indigo-700;
+    background-color: var(--color-primary-dark);
   }
 
   /* Navigation */
@@ -182,7 +217,7 @@
   }
 
   .navbar.scrolled .nav-link:not(.btn-nav):hover {
-    @apply text-indigo-600;
+    color: var(--color-primary);
   }
 
   .nav-toggle {
