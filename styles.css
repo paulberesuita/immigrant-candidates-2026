@@ -2,15 +2,15 @@
    CSS Variables & Base Styles
    =================================== */
 :root {
-    /* Clean color palette */
-    --primary: #6366F1;          /* Indigo */
-    --primary-dark: #4F46E5;
-    --primary-light: #818CF8;
+    /* Refined color palette - more sophisticated */
+    --primary: #4F46E5;          /* Deeper indigo */
+    --primary-dark: #4338CA;
+    --primary-light: #6366F1;
     --secondary: #0F172A;        /* Dark slate */
     --secondary-light: #1E293B;
-    --accent: #F59E0B;           /* Amber */
+    --accent: #F59E0B;           /* Bright amber */
     --accent-light: #FBBF24;
-    --success: #10B981;          /* Emerald */
+    --success: #059669;          /* Deeper emerald */
 
     /* Neutrals */
     --white: #FFFFFF;
@@ -20,8 +20,8 @@
     --dark-gray: #334155;
     --black: #0F172A;
 
-    /* Typography */
-    --font-heading: 'Playfair Display', Georgia, serif;
+    /* Typography - Inter only for modern feel */
+    --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
     /* Spacing */
@@ -106,9 +106,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .section-title {
     font-family: var(--font-heading);
-    font-size: clamp(32px, 5vw, 52px);
+    font-size: clamp(28px, 4vw, 44px);
     font-weight: 700;
     margin-bottom: 16px;
+    letter-spacing: -0.02em;
 }
 
 .section-title-light {
@@ -323,7 +324,10 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--secondary);
+    background-color: rgba(79, 70, 229, 1);
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 1);
     overflow: hidden;
     padding: 120px 24px 80px;
 }
@@ -354,11 +358,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-title {
     font-family: var(--font-heading);
-    font-size: clamp(42px, 8vw, 80px);
+    font-size: clamp(42px, 8vw, 72px);
     font-weight: 800;
     color: var(--white);
     margin-bottom: 24px;
     line-height: 1.1;
+    letter-spacing: -0.02em;
 }
 
 .hero-title .highlight {
@@ -396,10 +401,11 @@ h1, h2, h3, h4, h5, h6 {
 .hero-stat .stat-number {
     display: block;
     font-family: var(--font-heading);
-    font-size: 42px;
+    font-size: 36px;
     font-weight: 700;
     color: var(--white);
     line-height: 1;
+    letter-spacing: -0.02em;
 }
 
 .hero-stat .stat-label {
@@ -419,10 +425,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .about-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 80px;
-    align-items: center;
+    display: block;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .about-content {
@@ -439,14 +445,19 @@ h1, h2, h3, h4, h5, h6 {
 .about-features {
     margin-top: 40px;
     display: flex;
-    flex-direction: column;
-    gap: 24px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
 }
 
 .feature {
     display: flex;
-    gap: 16px;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    flex: 0 1 200px;
 }
 
 .feature-icon {
@@ -475,60 +486,6 @@ h1, h2, h3, h4, h5, h6 {
 .feature-text p {
     font-size: 14px;
     color: var(--medium-gray);
-}
-
-.about-visual {
-    position: relative;
-    height: 400px;
-}
-
-.visual-card {
-    position: absolute;
-    background: var(--white);
-    padding: 20px 28px;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--light-gray);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.card-emoji {
-    font-size: 32px;
-}
-
-.card-text {
-    font-weight: 600;
-    color: var(--black);
-}
-
-.visual-card-1 {
-    top: 20px;
-    left: 0;
-    animation: float 6s ease-in-out infinite;
-}
-
-.visual-card-2 {
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    animation: float2 6s ease-in-out infinite 1s;
-}
-
-.visual-card-3 {
-    bottom: 20px;
-    left: 40px;
-    animation: float 6s ease-in-out infinite 2s;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-@keyframes float2 {
-    0%, 100% { transform: translateY(-50%); }
-    50% { transform: translateY(calc(-50% - 15px)); }
 }
 
 /* ===================================
@@ -1035,11 +992,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .impact-number {
     font-family: var(--font-heading);
-    font-size: 48px;
+    font-size: 42px;
     font-weight: 700;
     color: var(--primary);
     line-height: 1;
     margin-bottom: 8px;
+    letter-spacing: -0.02em;
 }
 
 .impact-label {
@@ -1180,18 +1138,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 1024px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 60px;
-    }
-
-    .about-visual {
-        display: none;
-    }
-
-    .footer-grid {
+    .impact-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
     }
 }
 
