@@ -92,12 +92,11 @@
   }
 
   .section-label {
-    @apply inline-block text-xs font-bold tracking-widest uppercase mb-3;
-    color: var(--color-primary);
+    @apply inline-block text-xs font-bold tracking-widest uppercase mb-3 text-coral;
   }
 
   .section-label-light {
-    color: var(--color-accent);
+    @apply text-coral-light;
   }
 
   .section-title {
@@ -122,13 +121,11 @@
   }
 
   .btn-primary {
-    @apply text-white border-indigo-600;
-    background-color: var(--color-primary-dark);
+    @apply text-white border-coral bg-coral;
   }
 
   .btn-primary:hover {
-    @apply border-indigo-700;
-    background-color: var(--color-primary-dark);
+    @apply border-coral bg-coral opacity-90;
   }
 
   .btn-outline {
@@ -158,13 +155,12 @@
   }
 
   .btn-nav {
-    @apply text-white py-2.5 px-6 rounded-full;
-    background-color: var(--color-primary);
+    @apply text-white py-2.5 px-6 rounded-full bg-coral;
     color: white !important;
   }
 
   .btn-nav:hover {
-    background-color: var(--color-primary-dark);
+    @apply bg-coral opacity-90;
   }
 
   /* Navigation */
@@ -250,7 +246,7 @@
   }
 
   .hero-badge {
-    @apply inline-block py-2 px-5 bg-white/10 border border-white/20 rounded-full text-[13px] font-semibold text-white tracking-wide mb-6;
+    @apply inline-block py-2 px-5 bg-coral border border-coral rounded-full text-[13px] font-semibold text-white tracking-wide mb-6;
   }
 
   .hero-title {
