@@ -366,6 +366,14 @@
     @apply text-zinc-400;
   }
 
+  .search-wrapper {
+    @apply flex items-center gap-4;
+  }
+
+  .candidates-count {
+    @apply text-sm font-medium text-zinc-500 whitespace-nowrap;
+  }
+
   #candidates-grid.candidates-grid {
     @apply grid grid-cols-1 gap-6 w-full;
   }
@@ -908,6 +916,14 @@
 
     .filter-group {
       @apply justify-center;
+    }
+
+    .search-wrapper {
+      @apply flex-col-reverse items-stretch gap-3;
+    }
+
+    .candidates-count {
+      @apply text-center;
     }
 
     .search-box {

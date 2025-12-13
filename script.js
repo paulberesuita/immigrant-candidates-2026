@@ -181,7 +181,10 @@ async function loadCandidates() {
 function renderCandidates(candidates) {
     // Clear any existing content first
     clearCandidatesGrid();
-    
+
+    // Update count display
+    updateCandidatesCount(candidates.length, candidates.length);
+
     if (candidates.length === 0) {
         noResults.style.display = 'block';
         candidatesGrid.style.display = 'none';
@@ -377,6 +380,18 @@ let currentSearch = '';
 
 let candidateCards = [];
 
+// Update candidates count display
+function updateCandidatesCount(visibleCount, totalCount) {
+    const countElement = document.getElementById('candidates-count');
+    if (!countElement) return;
+
+    if (visibleCount === totalCount) {
+        countElement.textContent = `${totalCount} candidates`;
+    } else {
+        countElement.textContent = `${visibleCount} of ${totalCount}`;
+    }
+}
+
 function initializeFilters() {
     // Re-query candidate cards after they're rendered
     candidateCards = document.querySelectorAll('.candidate-card');
@@ -428,6 +443,9 @@ function filterCandidates() {
             card.style.display = 'none';
         }
     });
+
+    // Update the count display
+    updateCandidatesCount(visibleCount, allCandidates.length);
 
     // Show/hide no results message
     if (visibleCount === 0) {
