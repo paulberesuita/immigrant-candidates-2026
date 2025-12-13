@@ -245,7 +245,7 @@
   }
 
   .hero-badge {
-    @apply inline-block py-2 px-5 bg-coral border border-coral rounded-full text-[13px] font-semibold text-white tracking-wide mb-6;
+    @apply inline-block py-2 px-5 bg-indigo-500 border border-indigo-500 rounded-full text-[13px] font-semibold text-white tracking-wide mb-6;
   }
 
   .hero-title {
@@ -835,7 +835,11 @@
   }
 
   .btn-view-details {
-    @apply w-full py-3 px-4 text-sm text-center;
+    @apply w-full py-3 px-4 text-sm text-center bg-indigo-600 border-indigo-600;
+  }
+
+  .btn-view-details:hover {
+    @apply bg-indigo-700 border-indigo-700 opacity-100;
   }
 }
 
