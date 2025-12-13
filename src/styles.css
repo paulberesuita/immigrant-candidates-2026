@@ -138,12 +138,11 @@
   }
 
   .btn-card {
-    @apply text-white py-2.5 px-5 text-[13px] rounded-lg;
-    background-color: var(--color-primary);
+    @apply text-white py-2.5 px-5 text-[13px] rounded-lg bg-indigo-600;
   }
 
   .btn-card:hover {
-    background-color: var(--color-primary-dark);
+    @apply bg-indigo-700;
   }
 
   .btn-accent {
