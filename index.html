@@ -93,12 +93,15 @@
                     <button class="filter-btn" data-filter="state">State</button>
                     <button class="filter-btn" data-filter="local">Local</button>
                 </div>
-                <div class="search-box">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="M21 21l-4.35-4.35"></path>
-                    </svg>
-                    <input type="text" id="search-input" placeholder="Search by name or state...">
+                <div class="search-wrapper">
+                    <span class="candidates-count" id="candidates-count"></span>
+                    <div class="search-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="M21 21l-4.35-4.35"></path>
+                        </svg>
+                        <input type="text" id="search-input" placeholder="Search by name or state...">
+                    </div>
                 </div>
             </div>
 
