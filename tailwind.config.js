@@ -12,17 +12,36 @@ export default {
         body: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       colors: {
-        navy: {
-          50: '#E8EBF4',
-          100: '#C5CCE3',
-          200: '#9BA7CF',
-          300: '#7A8BC4',
-          400: '#4E63A9',
-          500: '#3A4FA8',
-          600: '#27388E',
-          700: '#1E2C6E',
-          800: '#162052',
-          900: '#0F1638',
+        // Primary - Electric Indigo (overriding Tailwind's indigo)
+        indigo: {
+          50: '#EEF2FF',
+          100: '#E0E7FF',
+          200: '#C7D2FE',
+          300: '#A5B4FC',
+          400: '#818CF8',
+          500: '#6366F1',
+          600: '#4338CA',  // Electric Indigo - main
+          700: '#312E81',  // Deep Indigo - emphasis
+          800: '#2E2772',
+          900: '#1E1B4B',
+        },
+        // Secondary - Coral
+        coral: {
+          DEFAULT: '#F97066',
+          light: '#FEB8B1',
+          500: '#F97066',
+          300: '#FEB8B1',
+        },
+        // Neutrals
+        snow: '#FAFAFA',
+        whisper: '#F4F4F5',
+        zinc: {
+          50: '#FAFAFA',
+          100: '#F4F4F5',
+          200: '#E4E4E7',
+          500: '#71717A',
+          700: '#3F3F46',
+          900: '#18181B',
         },
       },
     },

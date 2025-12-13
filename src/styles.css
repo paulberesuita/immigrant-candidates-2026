@@ -4,34 +4,38 @@
 
 /* Custom CSS Variables - Color Tokens */
 :root {
-  /* Primary Colors - Deep Navy Blue */
-  --color-primary: #27388E;        /* deep navy - main brand */
-  --color-primary-dark: #1E2C6E;   /* darker navy - hover/dark */
-  --color-primary-light: #3A4FA8;  /* lighter navy variant */
+  /* Primary Colors - Electric Indigo */
+  --color-primary: #4338CA;        /* electric indigo - main brand */
+  --color-primary-dark: #312E81;   /* deep indigo - hover/emphasis */
+  --color-primary-light: #4338CA;  /* electric indigo */
 
-  /* Neutral Colors - Warm Stone */
-  --color-neutral-50: #FAFAF9;    /* stone-50 */
-  --color-neutral-100: #F5F5F4;   /* stone-100 */
-  --color-neutral-200: #E7E5E4;   /* stone-200 */
-  --color-neutral-500: #78716C;   /* stone-500 */
-  --color-neutral-700: #44403C;   /* stone-700 */
-  --color-neutral-900: #1C1917;   /* stone-900 */
+  /* Secondary Colors - Coral */
+  --color-secondary: #F97066;      /* coral pop - confident accent */
+  --color-secondary-light: #FEB8B1; /* coral bright - soft accent */
 
-  /* Accent Colors - Navy (monochromatic) */
-  --color-accent: #27388E;        /* deep navy */
-  --color-accent-light: #7A8BC4;  /* light navy - for highlights */
+  /* Neutral Colors */
+  --color-neutral-50: #FAFAFA;    /* snow - clean backgrounds */
+  --color-neutral-100: #F4F4F5;   /* whisper - subtle depth */
+  --color-neutral-200: #E4E4E7;   /* light border */
+  --color-neutral-500: #71717A;   /* stone - secondary text */
+  --color-neutral-700: #3F3F46;   /* darker text */
+  --color-neutral-900: #18181B;   /* night - headlines */
+
+  /* Accent Colors */
+  --color-accent: #F97066;        /* coral pop */
+  --color-accent-light: #FEB8B1;  /* coral bright */
 
   /* Party Colors */
-  --color-party-d: #27388E;       /* deep navy - Democratic */
+  --color-party-d: #4338CA;       /* electric indigo - Democratic */
   --color-party-r: #DC2626;       /* red-600 - Republican */
-  --color-party-i: #6B7280;       /* gray-500 - Independent */
+  --color-party-i: #71717A;       /* stone - Independent */
 
   /* Base Colors */
   --color-white: #FFFFFF;
   --color-black: #000000;
 
-  /* Hero Background (deep navy blue) */
-  --color-hero-bg: #27388E;
+  /* Hero Background */
+  --color-hero-bg: #4338CA;
 
   /* Spacing */
   --section-padding: 100px;
@@ -61,7 +65,7 @@
   }
 
   body {
-    @apply font-body text-base leading-relaxed text-stone-700 bg-white overflow-x-hidden;
+    @apply font-body text-base leading-relaxed text-zinc-700 bg-white overflow-x-hidden;
   }
 
   img {
@@ -77,7 +81,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-body font-bold leading-tight text-stone-900;
+    @apply font-body font-bold leading-tight text-zinc-900;
   }
 }
 
@@ -105,7 +109,7 @@
   }
 
   .section-subtitle {
-    @apply text-lg text-stone-500 max-w-[600px] mx-auto;
+    @apply text-lg text-zinc-500 max-w-[600px] mx-auto;
   }
 
   .section-header {
@@ -118,12 +122,12 @@
   }
 
   .btn-primary {
-    @apply text-white border-navy-600;
+    @apply text-white border-indigo-600;
     background-color: var(--color-primary-dark);
   }
 
   .btn-primary:hover {
-    @apply border-navy-700;
+    @apply border-indigo-700;
     background-color: var(--color-primary-dark);
   }
 
@@ -146,11 +150,11 @@
   }
 
   .btn-accent {
-    @apply bg-navy-600 text-white border-navy-600 font-bold;
+    @apply bg-indigo-600 text-white border-indigo-600 font-bold;
   }
 
   .btn-accent:hover {
-    @apply bg-navy-700 border-navy-700;
+    @apply bg-indigo-700 border-indigo-700;
   }
 
   .btn-nav {
@@ -169,7 +173,7 @@
   }
 
   .navbar.scrolled {
-    @apply bg-white border-b border-stone-200 py-3;
+    @apply bg-white border-b border-zinc-200 py-3;
   }
 
   .nav-container {
@@ -181,7 +185,7 @@
   }
 
   .logo-icon {
-    @apply text-[28px] text-navy-200;
+    @apply text-[28px] text-indigo-200;
   }
 
   .logo-text {
@@ -193,11 +197,11 @@
   }
 
   .logo-year {
-    @apply text-[11px] font-bold tracking-widest text-navy-200;
+    @apply text-[11px] font-bold tracking-widest text-indigo-200;
   }
 
   .navbar.scrolled .logo-main {
-    @apply text-stone-900;
+    @apply text-zinc-900;
   }
 
   .nav-menu {
@@ -209,11 +213,11 @@
   }
 
   .nav-link:not(.btn-nav):hover {
-    @apply text-navy-200;
+    @apply text-indigo-200;
   }
 
   .navbar.scrolled .nav-link:not(.btn-nav) {
-    @apply text-stone-700;
+    @apply text-zinc-700;
   }
 
   .navbar.scrolled .nav-link:not(.btn-nav):hover {
@@ -229,12 +233,12 @@
   }
 
   .navbar.scrolled .nav-toggle span {
-    @apply bg-stone-700;
+    @apply bg-zinc-700;
   }
 
   /* Hero Section */
   .hero {
-    @apply relative min-h-screen flex items-center justify-center bg-navy-600 border border-black overflow-hidden pt-[120px] px-6 pb-20;
+    @apply relative min-h-screen flex items-center justify-center bg-indigo-600 border border-black overflow-hidden pt-[120px] px-6 pb-20;
   }
 
   .hero-bg {
@@ -254,7 +258,7 @@
   }
 
   .hero-title .highlight {
-    @apply text-navy-100;
+    @apply text-indigo-100;
   }
 
   .hero-description {
@@ -295,7 +299,7 @@
   }
 
   .about-text {
-    @apply text-[17px] text-stone-500 mb-5 leading-loose;
+    @apply text-[17px] text-zinc-500 mb-5 leading-loose;
   }
 
   .about-features {
@@ -307,7 +311,7 @@
   }
 
   .feature-icon {
-    @apply w-12 h-12 bg-navy-600 rounded-xl flex items-center justify-center flex-shrink-0;
+    @apply w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0;
   }
 
   .feature-icon svg {
@@ -319,12 +323,12 @@
   }
 
   .feature-text p {
-    @apply text-sm text-stone-500;
+    @apply text-sm text-zinc-500;
   }
 
   /* Candidates Section */
   .candidates {
-    @apply py-[100px] bg-stone-50;
+    @apply py-[100px] bg-zinc-50;
   }
 
   .filters {
@@ -336,15 +340,15 @@
   }
 
   .filter-btn {
-    @apply py-2.5 px-5 font-body text-sm font-medium text-stone-500 bg-white border border-stone-200 rounded-full cursor-pointer transition-all duration-200;
+    @apply py-2.5 px-5 font-body text-sm font-medium text-zinc-500 bg-white border border-zinc-200 rounded-full cursor-pointer transition-all duration-200;
   }
 
   .filter-btn:hover {
-    @apply border-navy-600 text-navy-600;
+    @apply border-indigo-600 text-indigo-600;
   }
 
   .filter-btn.active {
-    @apply bg-navy-600 border-navy-600 text-white;
+    @apply bg-indigo-600 border-indigo-600 text-white;
   }
 
   .search-box {
@@ -352,19 +356,19 @@
   }
 
   .search-box svg {
-    @apply absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-stone-500;
+    @apply absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-zinc-500;
   }
 
   .search-box input {
-    @apply w-full py-3 px-4 pl-12 font-body text-sm border border-stone-200 rounded-full bg-white transition-all duration-200;
+    @apply w-full py-3 px-4 pl-12 font-body text-sm border border-zinc-200 rounded-full bg-white transition-all duration-200;
   }
 
   .search-box input:focus {
-    @apply outline-none border-navy-600;
+    @apply outline-none border-indigo-600;
   }
 
   .search-box input::placeholder {
-    @apply text-stone-400;
+    @apply text-zinc-400;
   }
 
   #candidates-grid.candidates-grid {
@@ -384,11 +388,11 @@
   }
 
   .candidate-card.skeleton {
-    @apply border-stone-200 pointer-events-none;
+    @apply border-zinc-200 pointer-events-none;
   }
 
   .candidate-card.skeleton:hover {
-    @apply border-stone-200;
+    @apply border-zinc-200;
   }
 
   .skeleton-shimmer {
@@ -445,7 +449,7 @@
   }
 
   .error-panel {
-    @apply col-span-full text-center py-7 px-5 border border-stone-200 bg-white rounded-2xl;
+    @apply col-span-full text-center py-7 px-5 border border-zinc-200 bg-white rounded-2xl;
   }
 
   .error-panel h3 {
@@ -453,15 +457,15 @@
   }
 
   .error-panel p {
-    @apply text-stone-500 mb-4;
+    @apply text-zinc-500 mb-4;
   }
 
   .candidate-card {
-    @apply bg-white rounded-2xl overflow-hidden border border-stone-200 transition-all duration-200 flex flex-col w-full min-w-0 h-full;
+    @apply bg-white rounded-2xl overflow-hidden border border-zinc-200 transition-all duration-200 flex flex-col w-full min-w-0 h-full;
   }
 
   .candidate-card:hover {
-    @apply border-navy-600 -translate-y-0.5;
+    @apply border-indigo-600 -translate-y-0.5;
   }
 
   .card-header {
@@ -469,7 +473,7 @@
   }
 
   .candidate-photo {
-    @apply w-[100px] h-[100px] rounded-full bg-navy-600 flex items-center justify-center mb-4 overflow-hidden relative;
+    @apply w-[100px] h-[100px] rounded-full bg-indigo-600 flex items-center justify-center mb-4 overflow-hidden relative;
   }
 
   .candidate-photo img.candidate-image {
@@ -481,7 +485,7 @@
   }
 
   .candidate-badge {
-    @apply absolute top-4 right-4 py-1.5 px-3 bg-stone-100 rounded-full text-[11px] font-semibold text-navy-600 uppercase tracking-wide;
+    @apply absolute top-4 right-4 py-1.5 px-3 bg-zinc-100 rounded-full text-[11px] font-semibold text-indigo-600 uppercase tracking-wide;
   }
 
   .card-body {
@@ -505,7 +509,7 @@
   }
 
   .party-badge.party-d {
-    @apply bg-navy-600 text-white;
+    @apply bg-indigo-600 text-white;
   }
 
   .party-badge.party-r {
@@ -517,40 +521,40 @@
   }
 
   .status-badge {
-    @apply inline-block py-1 px-2 rounded text-[11px] font-semibold bg-stone-200 text-stone-700 capitalize;
+    @apply inline-block py-1 px-2 rounded text-[11px] font-semibold bg-zinc-200 text-zinc-700 capitalize;
   }
 
   .status-badge.status-incumbent {
-    @apply bg-navy-600 text-white;
+    @apply bg-indigo-600 text-white;
   }
 
   .candidate-meta {
-    @apply text-xs text-stone-500 mb-3 italic;
+    @apply text-xs text-zinc-500 mb-3 italic;
   }
 
   .candidate-age,
   .candidate-heritage {
-    @apply text-stone-500;
+    @apply text-zinc-500;
   }
 
   .candidate-endorsements {
-    @apply text-[13px] text-stone-700 mt-3 p-3 bg-stone-50 rounded-lg border-l-4 border-navy-600;
+    @apply text-[13px] text-zinc-700 mt-3 p-3 bg-zinc-50 rounded-lg border-l-4 border-indigo-600;
   }
 
   .candidate-endorsements strong {
-    @apply text-stone-900 block mb-1;
+    @apply text-zinc-900 block mb-1;
   }
 
   .candidate-position {
-    @apply inline-flex items-center justify-center gap-1.5 text-sm text-stone-500 font-medium mb-2 mt-1;
+    @apply inline-flex items-center justify-center gap-1.5 text-sm text-zinc-500 font-medium mb-2 mt-1;
   }
 
   .candidate-position svg {
-    @apply text-stone-500 flex-shrink-0;
+    @apply text-zinc-500 flex-shrink-0;
   }
 
   .candidate-bio {
-    @apply text-sm text-stone-700 leading-relaxed mb-4 flex-1 min-h-12;
+    @apply text-sm text-zinc-700 leading-relaxed mb-4 flex-1 min-h-12;
   }
 
   .candidate-issues {
@@ -558,11 +562,11 @@
   }
 
   .issue-tag {
-    @apply py-1 px-3 bg-stone-100 rounded-full text-xs font-medium text-stone-700;
+    @apply py-1 px-3 bg-zinc-100 rounded-full text-xs font-medium text-zinc-700;
   }
 
   .card-footer {
-    @apply py-4 px-6 border-t border-stone-200 flex flex-col items-stretch gap-3 mt-auto;
+    @apply py-4 px-6 border-t border-zinc-200 flex flex-col items-stretch gap-3 mt-auto;
   }
 
   .card-footer .social-links {
@@ -570,7 +574,7 @@
   }
 
   .social-link {
-    @apply w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 transition-all duration-200;
+    @apply w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-500 transition-all duration-200;
   }
 
   .social-link svg {
@@ -578,7 +582,7 @@
   }
 
   .social-link:hover {
-    @apply bg-navy-600 text-white;
+    @apply bg-indigo-600 text-white;
   }
 
   .no-results {
@@ -594,7 +598,7 @@
   }
 
   .no-results p {
-    @apply text-stone-500;
+    @apply text-zinc-500;
   }
 
   /* Impact Section */
@@ -607,28 +611,28 @@
   }
 
   .impact-card {
-    @apply bg-stone-50 p-8 rounded-2xl text-center transition-all duration-200;
+    @apply bg-zinc-50 p-8 rounded-2xl text-center transition-all duration-200;
   }
 
   .impact-card:hover {
-    @apply bg-stone-200;
+    @apply bg-zinc-200;
   }
 
   .impact-number {
-    @apply font-heading text-[42px] font-bold text-navy-600 leading-none mb-2 tracking-tight;
+    @apply font-heading text-[42px] font-bold text-indigo-600 leading-none mb-2 tracking-tight;
   }
 
   .impact-label {
-    @apply text-sm font-semibold text-stone-900 mb-3;
+    @apply text-sm font-semibold text-zinc-900 mb-3;
   }
 
   .impact-description {
-    @apply text-sm text-stone-500 leading-relaxed;
+    @apply text-sm text-zinc-500 leading-relaxed;
   }
 
   /* Newsletter Section */
   .newsletter {
-    @apply py-[100px] bg-stone-900;
+    @apply py-[100px] bg-zinc-900;
   }
 
   .newsletter-content {
@@ -652,7 +656,7 @@
   }
 
   .form-row input:focus {
-    @apply outline-2 outline-navy-600 outline-offset-2;
+    @apply outline-2 outline-indigo-600 outline-offset-2;
   }
 
   .form-note {
@@ -661,7 +665,7 @@
 
   /* Footer */
   .footer {
-    @apply bg-stone-900 py-10 text-white;
+    @apply bg-zinc-900 py-10 text-white;
   }
 
   .footer-simple {
@@ -685,7 +689,7 @@
   }
 
   .footer-nav a:hover {
-    @apply text-navy-300;
+    @apply text-indigo-300;
   }
 
   .footer-bottom {
@@ -723,11 +727,11 @@
   }
 
   .modal-close {
-    @apply absolute top-5 right-5 w-10 h-10 border-none bg-stone-200 rounded-full cursor-pointer flex items-center justify-center z-[10002] transition-all duration-200 text-stone-700;
+    @apply absolute top-5 right-5 w-10 h-10 border-none bg-zinc-200 rounded-full cursor-pointer flex items-center justify-center z-[10002] transition-all duration-200 text-zinc-700;
   }
 
   .modal-close:hover {
-    @apply bg-stone-500 text-white rotate-90;
+    @apply bg-zinc-500 text-white rotate-90;
   }
 
   .modal-close svg {
@@ -735,7 +739,7 @@
   }
 
   .modal-header {
-    @apply flex gap-6 p-10 pb-6 border-b border-stone-200 bg-gradient-to-br from-stone-50 to-white;
+    @apply flex gap-6 p-10 pb-6 border-b border-zinc-200 bg-gradient-to-br from-zinc-50 to-white;
   }
 
   .modal-photo-section {
@@ -748,11 +752,11 @@
   }
 
   .modal-photo-placeholder {
-    @apply bg-navy-600 text-white flex items-center justify-center text-5xl font-bold;
+    @apply bg-indigo-600 text-white flex items-center justify-center text-5xl font-bold;
   }
 
   .modal-badge {
-    @apply absolute bottom-0 right-0 bg-navy-600 text-white py-1.5 px-3 rounded-full text-xs font-semibold shadow-lg;
+    @apply absolute bottom-0 right-0 bg-indigo-600 text-white py-1.5 px-3 rounded-full text-xs font-semibold shadow-lg;
   }
 
   .modal-title-section {
@@ -760,7 +764,7 @@
   }
 
   .modal-candidate-name {
-    @apply text-[32px] font-bold mb-3 text-stone-900;
+    @apply text-[32px] font-bold mb-3 text-zinc-900;
   }
 
   .modal-badges-row {
@@ -768,7 +772,7 @@
   }
 
   .modal-meta {
-    @apply text-base text-stone-500 italic;
+    @apply text-base text-zinc-500 italic;
   }
 
   .modal-body-content {
@@ -784,7 +788,7 @@
   }
 
   .modal-section-title {
-    @apply text-xl font-bold mb-4 text-stone-900 border-b-2 border-navy-600 pb-2;
+    @apply text-xl font-bold mb-4 text-zinc-900 border-b-2 border-indigo-600 pb-2;
   }
 
   .modal-info-grid {
@@ -796,11 +800,11 @@
   }
 
   .modal-info-item strong {
-    @apply text-stone-900 mr-2;
+    @apply text-zinc-900 mr-2;
   }
 
   .modal-text {
-    @apply text-[15px] leading-loose text-stone-700;
+    @apply text-[15px] leading-loose text-zinc-700;
   }
 
   .modal-issues {
@@ -808,7 +812,7 @@
   }
 
   .modal-issue-tag {
-    @apply py-2 px-4 bg-stone-50 rounded-full text-sm font-medium text-stone-700 border border-stone-200;
+    @apply py-2 px-4 bg-zinc-50 rounded-full text-sm font-medium text-zinc-700 border border-zinc-200;
   }
 
   .modal-social-section {
@@ -820,11 +824,11 @@
   }
 
   .modal-social-link {
-    @apply w-11 h-11 flex items-center justify-center bg-stone-100 rounded-full transition-all duration-200;
+    @apply w-11 h-11 flex items-center justify-center bg-zinc-100 rounded-full transition-all duration-200;
   }
 
   .modal-social-link:hover {
-    @apply bg-navy-600 text-white -translate-y-0.5;
+    @apply bg-indigo-600 text-white -translate-y-0.5;
   }
 
   .modal-website-btn {
@@ -872,7 +876,7 @@
     }
 
     .nav-menu .nav-link {
-      @apply text-stone-700 text-lg;
+      @apply text-zinc-700 text-lg;
     }
 
     .nav-toggle {
