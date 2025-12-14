@@ -600,6 +600,11 @@ const numbersObserver = new IntersectionObserver((entries) => {
                 const num = parseInt(text);
                 entry.target.textContent = '0M+';
                 animateCounter(entry.target, num, 'M+');
+            } else if (text.includes('M') && !text.includes('M+')) {
+                // Handle "M" without "+" (e.g., "36M")
+                const num = parseInt(text);
+                entry.target.textContent = '0M';
+                animateCounter(entry.target, num, 'M');
             } else if (text.includes('%')) {
                 const num = parseInt(text);
                 entry.target.textContent = '0%';
