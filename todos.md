@@ -11,9 +11,9 @@ These items are essential for a production-ready informational site.
 - [ ] **Add database schema file** - Create `schema.sql` with the `candidates` table definition for reproducibility
 - [ ] **Add seed data script** - Create a script or SQL file to populate the database with initial candidates
 - [ ] **Add favicon and site icons** - Missing favicon.ico and apple-touch-icon
-- [ ] **Add meta description** - SEO meta tag missing in `<head>`
-- [ ] **Add Open Graph tags** - For proper social media sharing previews
-- [ ] **Add Twitter Card tags** - For Twitter/X sharing previews
+- [x] **Add meta description** - SEO meta tag missing in `<head>`
+- [x] **Add Open Graph tags** - For proper social media sharing previews
+- [x] **Add Twitter Card tags** - For Twitter/X sharing previews
 
 ---
 
@@ -21,11 +21,11 @@ These items are essential for a production-ready informational site.
 
 Important for SEO, discoverability, and professional polish.
 
-- [ ] **Create robots.txt** - Allow search engine crawling
-- [ ] **Create sitemap.xml** - Help search engines index the site
+- [x] **Create robots.txt** - Allow search engine crawling
+- [x] **Create sitemap.xml** - Help search engines index the site
 - [ ] **Add custom 404 page** - Better UX for broken links
 - [ ] **Implement newsletter backend** - Currently simulated; integrate with Mailchimp, ConvertKit, or similar
-- [ ] **Add structured data (JSON-LD)** - Schema.org markup for candidates/organization
+- [x] **Add structured data (JSON-LD)** - Schema.org markup for candidates/organization
 - [ ] **Restrict CORS in production** - Currently wide-open (`*`); should limit to your domain
 
 ---
