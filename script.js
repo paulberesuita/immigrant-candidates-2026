@@ -481,7 +481,7 @@ document.head.appendChild(style);
 
 const newsletterForm = document.getElementById('newsletter-form');
 
-newsletterForm.addEventListener('submit', (e) => {
+newsletterForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const emailInput = newsletterForm.querySelector('input[type="email"]');
@@ -492,36 +492,57 @@ newsletterForm.addEventListener('submit', (e) => {
     submitButton.textContent = 'Subscribing...';
     submitButton.disabled = true;
 
-    // Simulate API call
-    setTimeout(() => {
-        // Show success
-        newsletterForm.innerHTML = `
-            <div class="form-success">
-                <div class="success-icon">✓</div>
-                <p>Thanks for subscribing! We'll keep you updated on Latino Leaders 2026.</p>
-            </div>
-        `;
+    try {
+        const response = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
 
-        // Style the success message
-        const successDiv = newsletterForm.querySelector('.form-success');
-        successDiv.style.textAlign = 'center';
+        const data = await response.json();
 
-        const successIcon = successDiv.querySelector('.success-icon');
-        successIcon.style.width = '50px';
-        successIcon.style.height = '50px';
-        successIcon.style.background = '#10B981';
-        successIcon.style.borderRadius = '50%';
-        successIcon.style.display = 'flex';
-        successIcon.style.alignItems = 'center';
-        successIcon.style.justifyContent = 'center';
-        successIcon.style.margin = '0 auto 16px';
-        successIcon.style.fontSize = '24px';
-        successIcon.style.color = 'white';
+        if (response.ok) {
+            // Show success
+            newsletterForm.innerHTML = `
+                <div class="form-success">
+                    <div class="success-icon">✓</div>
+                    <p>${data.message || 'Thanks for subscribing! We\'ll keep you updated on Latino Leaders 2026.'}</p>
+                </div>
+            `;
 
-        const successText = successDiv.querySelector('p');
-        successText.style.color = 'rgba(255, 255, 255, 0.9)';
-        successText.style.fontSize = '16px';
-    }, 1500);
+            // Style the success message
+            const successDiv = newsletterForm.querySelector('.form-success');
+            successDiv.style.textAlign = 'center';
+
+            const successIcon = successDiv.querySelector('.success-icon');
+            successIcon.style.width = '50px';
+            successIcon.style.height = '50px';
+            successIcon.style.background = '#10B981';
+            successIcon.style.borderRadius = '50%';
+            successIcon.style.display = 'flex';
+            successIcon.style.alignItems = 'center';
+            successIcon.style.justifyContent = 'center';
+            successIcon.style.margin = '0 auto 16px';
+            successIcon.style.fontSize = '24px';
+            successIcon.style.color = 'white';
+
+            const successText = successDiv.querySelector('p');
+            successText.style.color = 'rgba(255, 255, 255, 0.9)';
+            successText.style.fontSize = '16px';
+        } else {
+            // Show error
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+            alert(data.error || 'Failed to subscribe. Please try again.');
+        }
+    } catch (error) {
+        console.error('Subscribe error:', error);
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+        alert('Failed to subscribe. Please try again.');
+    }
 });
 
 // ===================================
