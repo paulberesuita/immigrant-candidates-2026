@@ -8,8 +8,6 @@ Prioritized list of improvements for the project.
 
 These items are essential for a production-ready informational site.
 
-- [ ] **Add database schema file** - Create `schema.sql` with the `candidates` table definition for reproducibility
-- [ ] **Add seed data script** - Create a script or SQL file to populate the database with initial candidates
 - [ ] **Add favicon and site icons** - Missing favicon.ico and apple-touch-icon
 - [x] **Add meta description** - SEO meta tag missing in `<head>`
 - [x] **Add Open Graph tags** - For proper social media sharing previews
@@ -23,8 +21,7 @@ Important for SEO, discoverability, and professional polish.
 
 - [x] **Create robots.txt** - Allow search engine crawling
 - [x] **Create sitemap.xml** - Help search engines index the site
-- [ ] **Add custom 404 page** - Better UX for broken links
-- [ ] **Implement newsletter backend** - Currently simulated; integrate with Mailchimp, ConvertKit, or similar
+- [x] **Add custom 404 page** - Better UX for broken links
 - [x] **Add structured data (JSON-LD)** - Schema.org markup for candidates/organization
 - [ ] **Restrict CORS in production** - Currently wide-open (`*`); should limit to your domain
 
@@ -34,9 +31,6 @@ Important for SEO, discoverability, and professional polish.
 
 Developer experience and maintainability improvements.
 
-- [ ] **Add ESLint configuration** - Enforce code quality and catch bugs
-- [ ] **Add Prettier configuration** - Consistent code formatting
-- [ ] **Add basic CI/CD pipeline** - GitHub Actions for linting and deployment
 - [ ] **Create `.env.example`** - Document required environment variables
 - [ ] **Add error tracking** - Integrate Sentry or similar for production error monitoring
 - [ ] **Add basic unit tests** - Test critical functions like `escapeHTML`, `truncateText`
