@@ -321,6 +321,10 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-neutral-900);
 }
 
+.navbar.scrolled .logo-year {
+  color: var(--color-primary) !important;
+}
+
 .nav-menu {
   display: flex;
   align-items: center;
@@ -1173,6 +1177,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer-logo .logo-main {
   color: var(--color-white);
+}
+
+.footer-logo .logo-year {
+  color: var(--color-white) !important;
 }
 
 .footer-nav {

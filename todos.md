@@ -27,17 +27,7 @@ Important for SEO, discoverability, and professional polish.
 
 ---
 
-## Priority 3: Medium
-
-Developer experience and maintainability improvements.
-
-- [ ] **Create `.env.example`** - Document required environment variables
-- [ ] **Add error tracking** - Integrate Sentry or similar for production error monitoring
-- [ ] **Add basic unit tests** - Test critical functions like `escapeHTML`, `truncateText`
-
----
-
-## Priority 4: Low
+## Priority 3: Low
 
 Nice-to-have features and enhancements.
 
