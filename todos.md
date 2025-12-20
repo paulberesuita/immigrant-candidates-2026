@@ -8,7 +8,7 @@ Prioritized list of improvements for the project.
 
 These items are essential for a production-ready informational site.
 
-- [ ] **Add favicon and site icons** - Missing favicon.ico and apple-touch-icon
+- [x] **Add favicon and site icons** - SVG favicon added (PNG versions can be generated later if needed)
 - [x] **Add meta description** - SEO meta tag missing in `<head>`
 - [x] **Add Open Graph tags** - For proper social media sharing previews
 - [x] **Add Twitter Card tags** - For Twitter/X sharing previews
@@ -53,6 +53,10 @@ Nice-to-have features and enhancements.
 - [x] Skeleton loading states
 - [x] Error handling with retry button
 - [x] Counter animations for impact stats
+- [x] Migrated from Tailwind build to plain CSS
+- [x] Added Plausible analytics (privacy-friendly)
+- [x] Added SVG favicon (Phosphor star icon)
+- [x] Email subscription with D1 database + Resend welcome emails
 
 ---
 
