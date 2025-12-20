@@ -1,4 +1,20 @@
 // ===================================
+// Service Worker Registration
+// ===================================
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+                console.log('Service Worker registered:', registration.scope);
+            })
+            .catch((error) => {
+                console.log('Service Worker registration failed:', error);
+            });
+    });
+}
+
+// ===================================
 // Navigation Functionality
 // ===================================
 
@@ -118,16 +134,52 @@ function renderSkeletonCandidates(count = 6) {
     if (noResults) noResults.style.display = 'none';
 }
 
-function renderCandidatesError(message) {
+function getFriendlyErrorMessage(error) {
+    const message = error?.message || error || '';
+
+    // Offline or network errors
+    if (message.includes('offline') || message.includes('Failed to fetch') || message.includes('NetworkError')) {
+        return {
+            title: "You're offline",
+            message: "It looks like you've lost your internet connection. Please check your connection and try again."
+        };
+    }
+
+    // Server errors
+    if (message.includes('500') || message.includes('503') || message.includes('502')) {
+        return {
+            title: "Something went wrong",
+            message: "We're having trouble loading the candidates right now. Please try again in a moment."
+        };
+    }
+
+    // Not found
+    if (message.includes('404')) {
+        return {
+            title: "Candidates not found",
+            message: "We couldn't find the candidate data. Please try again later."
+        };
+    }
+
+    // Default friendly message
+    return {
+        title: "Unable to load candidates",
+        message: "Something unexpected happened. Please try again."
+    };
+}
+
+function renderCandidatesError(error) {
     if (!candidatesGrid) return;
     clearCandidatesGrid();
+
+    const { title, message } = getFriendlyErrorMessage(error);
 
     const panel = document.createElement('div');
     panel.className = 'error-panel';
     panel.innerHTML = `
-        <h3>Couldn’t load candidates</h3>
-        <p>${escapeHTML(message || 'Please try again.')}</p>
-        <button type="button" class="btn btn-primary" id="retry-load">Retry</button>
+        <h3>${escapeHTML(title)}</h3>
+        <p>${escapeHTML(message)}</p>
+        <button type="button" class="btn btn-primary" id="retry-load">Try Again</button>
     `;
     candidatesGrid.appendChild(panel);
 
@@ -532,18 +584,43 @@ newsletterForm.addEventListener('submit', async (e) => {
             successText.style.color = 'rgba(255, 255, 255, 0.9)';
             successText.style.fontSize = '16px';
         } else {
-            // Show error
+            // Show friendly error
             submitButton.textContent = originalText;
             submitButton.disabled = false;
-            alert(data.error || 'Failed to subscribe. Please try again.');
+            showSubscribeError(emailInput, data.error || 'Something went wrong. Please try again.');
         }
     } catch (error) {
         console.error('Subscribe error:', error);
         submitButton.textContent = originalText;
         submitButton.disabled = false;
-        alert('Failed to subscribe. Please try again.');
+
+        // Friendly offline message
+        const message = navigator.onLine === false || error.message?.includes('fetch')
+            ? "You appear to be offline. Please check your connection and try again."
+            : "Something went wrong. Please try again.";
+        showSubscribeError(emailInput, message);
     }
 });
+
+function showSubscribeError(inputElement, message) {
+    // Remove any existing error
+    const existingError = inputElement.parentElement.querySelector('.subscribe-error');
+    if (existingError) existingError.remove();
+
+    // Create error message element
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'subscribe-error';
+    errorDiv.textContent = message;
+    errorDiv.style.color = '#F97066';
+    errorDiv.style.fontSize = '14px';
+    errorDiv.style.marginTop = '8px';
+    errorDiv.style.textAlign = 'center';
+
+    inputElement.parentElement.appendChild(errorDiv);
+
+    // Remove after 5 seconds
+    setTimeout(() => errorDiv.remove(), 5000);
+}
 
 // ===================================
 // Scroll Animations

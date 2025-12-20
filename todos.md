@@ -1,45 +1,19 @@
 # Latino Leaders 2026 - TODO List
 
-Prioritized list of improvements for the project.
-
 ---
 
-## Priority 1: Critical
+## Inbox
 
-These items are essential for a production-ready informational site.
-
-- [x] **Add favicon and site icons** - SVG favicon added (PNG versions can be generated later if needed)
-- [x] **Add meta description** - SEO meta tag missing in `<head>`
-- [x] **Add Open Graph tags** - For proper social media sharing previews
-- [x] **Add Twitter Card tags** - For Twitter/X sharing previews
-
----
-
-## Priority 2: High
-
-Important for SEO, discoverability, and professional polish.
-
-- [x] **Create robots.txt** - Allow search engine crawling
-- [x] **Create sitemap.xml** - Help search engines index the site
-- [x] **Add custom 404 page** - Better UX for broken links
-- [x] **Add structured data (JSON-LD)** - Schema.org markup for candidates/organization
-- [ ] **Restrict CORS in production** - Currently wide-open (`*`); should limit to your domain
-
----
-
-## Priority 3: Low
-
-Nice-to-have features and enhancements.
-
-- [ ] **Add pagination** - Currently loads all candidates at once; may need pagination at scale
-- [ ] **Add sorting options** - Allow users to sort by name, state, party, etc.
-- [ ] **Add social share buttons** - Let users share candidate profiles
-- [ ] **Add "skip to content" link** - Accessibility improvement for keyboard users
-- [ ] **Create Privacy Policy page** - Standard legal page for informational sites
-- [ ] **Add service worker** - Offline support / PWA capabilities
-- [ ] **Add web manifest** - PWA installability
-- [ ] **Optimize images** - Add WebP format, srcset for responsive images
-- [ ] **Add candidate submission form** - Allow candidates to request to be added
+- [ ] Restrict CORS in production - Currently wide-open (`*`); should limit to your domain
+- [ ] Add pagination - Currently loads all candidates at once; may need pagination at scale
+- [ ] Add sorting options - Allow users to sort by name, state, party, etc.
+- [ ] Add social share buttons - Let users share candidate profiles
+- [ ] Add "skip to content" link - Accessibility improvement for keyboard users
+- [ ] Create Privacy Policy page - Standard legal page for informational sites
+- [ ] Add web manifest - PWA installability
+- [ ] Optimize images - Add WebP format, srcset for responsive images
+- [ ] Add candidate submission form - Allow candidates to request to be added
+- [ ] Add Spanish language support - Translate site content for Spanish-speaking users
 
 ---
 
@@ -57,11 +31,11 @@ Nice-to-have features and enhancements.
 - [x] Added Plausible analytics (privacy-friendly)
 - [x] Added SVG favicon (Phosphor star icon)
 - [x] Email subscription with D1 database + Resend welcome emails
-
----
-
-## Notes
-
-- This is primarily an **informational site**, so admin/authentication features are not needed
-- The site uses Cloudflare Pages + D1, so improvements should stay within that ecosystem
-- Focus on SEO and discoverability since the goal is voter education
+- [x] Add meta description
+- [x] Add Open Graph tags
+- [x] Add Twitter Card tags
+- [x] Create robots.txt
+- [x] Create sitemap.xml
+- [x] Add custom 404 page
+- [x] Add structured data (JSON-LD)
+- [x] Add service worker for offline support
