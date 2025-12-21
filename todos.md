@@ -4,7 +4,6 @@
 
 ## Inbox
 
-- [ ] Restrict CORS in production - Currently wide-open (`*`); should limit to your domain
 - [ ] Add pagination - Currently loads all candidates at once; may need pagination at scale
 - [ ] Add sorting options - Allow users to sort by name, state, party, etc.
 - [ ] Add social share buttons - Let users share candidate profiles
@@ -14,7 +13,16 @@
 - [ ] Optimize images - Add WebP format, srcset for responsive images
 - [ ] Add candidate submission form - Allow candidates to request to be added
 - [ ] Add Spanish language support - Translate site content for Spanish-speaking users
-
+- [ ] **Explore n8n**
+  - Free tier: Unlimited (self-hosted), or free cloud tier available
+  - Setup: Open-source, visual workflow builder, can self-host or use cloud
+  - Supports full Gmail actions (send, draft, search, labels)
+- [ ] **Explore Chrome Extension Gmail MCP**
+  - Free tier: Completely free, unlimited usage
+  - Setup: Easiest option — no Google Cloud, no OAuth, no API keys needed
+  - Uses existing Chrome browser session to control Gmail
+  - GitHub: cafferychen777/gmail-mcp
+  
 ---
 
 ## Completed
