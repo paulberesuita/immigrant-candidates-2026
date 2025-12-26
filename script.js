@@ -150,6 +150,104 @@ function escapeHTML(value) {
         .replaceAll("'", '&#39;');
 }
 
+// ===================================
+// Slug Generation & URL Routing
+// ===================================
+
+/**
+ * Generate a URL-friendly slug from candidate name and state
+ * e.g., "Juan Garcia" + "CA" -> "juan-garcia-ca"
+ */
+function generateCandidateSlug(candidate) {
+    if (!candidate || !candidate.name) return null;
+
+    const namePart = candidate.name
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+        .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+        .trim()
+        .replace(/\s+/g, '-'); // Replace spaces with hyphens
+
+    const statePart = (candidate.state || '').toLowerCase();
+
+    return statePart ? `${namePart}-${statePart}` : namePart;
+}
+
+/**
+ * Find a candidate by their slug
+ */
+function findCandidateBySlug(slug) {
+    if (!slug || !allCandidates.length) return null;
+
+    return allCandidates.find(candidate => generateCandidateSlug(candidate) === slug);
+}
+
+/**
+ * Update URL hash with candidate slug (for shareable links)
+ */
+function updateUrlWithCandidate(candidate) {
+    if (!candidate) {
+        // Clear the hash when closing modal
+        if (window.location.hash) {
+            history.pushState(null, '', window.location.pathname + window.location.search);
+        }
+        return;
+    }
+
+    const slug = generateCandidateSlug(candidate);
+    if (slug) {
+        history.pushState(null, '', `#candidate/${slug}`);
+    }
+}
+
+/**
+ * Parse candidate slug from URL hash
+ */
+function getCandidateSlugFromUrl() {
+    const hash = window.location.hash;
+    if (!hash || !hash.startsWith('#candidate/')) return null;
+
+    return hash.replace('#candidate/', '');
+}
+
+/**
+ * Handle URL hash changes (back/forward navigation)
+ */
+function handleHashChange() {
+    const slug = getCandidateSlugFromUrl();
+
+    if (slug) {
+        const candidate = findCandidateBySlug(slug);
+        if (candidate) {
+            // Open modal without updating URL (already correct)
+            openCandidateModalWithoutUrlUpdate(candidate);
+        }
+    } else {
+        // Close modal if open
+        const modal = document.getElementById('candidate-modal');
+        if (modal && modal.classList.contains('active')) {
+            closeCandidateModalWithoutUrlUpdate();
+        }
+    }
+}
+
+/**
+ * Check URL on page load and open modal if candidate slug is present
+ */
+function checkUrlForCandidate() {
+    const slug = getCandidateSlugFromUrl();
+    if (slug) {
+        const candidate = findCandidateBySlug(slug);
+        if (candidate) {
+            openCandidateModalWithoutUrlUpdate(candidate);
+        }
+    }
+}
+
+// Listen for hash changes (back/forward navigation)
+window.addEventListener('hashchange', handleHashChange);
+
 // Fetch candidates from API
 async function loadCandidates() {
     try {
@@ -171,6 +269,9 @@ async function loadCandidates() {
         // Ensure we have an array
         allCandidates = Array.isArray(data) ? data : (data.results || []);
         renderCandidates(allCandidates);
+
+        // Check URL for candidate slug after candidates are loaded
+        checkUrlForCandidate();
     } catch (error) {
         console.error('Error loading candidates:', error);
         renderCandidatesError(error?.message || 'Unknown error');
@@ -820,17 +921,20 @@ function attachModalFocusTrap(modal, modalContent) {
     modal.addEventListener('keydown', modalTrapHandler);
 }
 
-function openCandidateModal(candidate, triggerElement) {
+/**
+ * Core modal opening logic (shared between URL-updating and non-URL-updating versions)
+ */
+function openCandidateModalCore(candidate, triggerElement) {
     currentCandidate = candidate;
     const modal = document.getElementById('candidate-modal');
     const modalBody = document.getElementById('modal-body');
     const modalClose = document.getElementById('modal-close');
     const modalContent = modal ? modal.querySelector('.modal-content') : null;
-    
+
     if (!modal || !modalBody) return;
 
     lastFocusedElement = triggerElement || document.activeElement;
-    
+
     // Build full candidate details HTML
     const modalHTML = buildModalContent(candidate);
     modalBody.innerHTML = modalHTML;
@@ -843,7 +947,7 @@ function openCandidateModal(candidate, triggerElement) {
     } else {
         modal.removeAttribute('aria-labelledby');
     }
-    
+
     // Show modal
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
@@ -852,12 +956,36 @@ function openCandidateModal(candidate, triggerElement) {
     // Focus management + focus trap
     if (modalClose) modalClose.focus();
     attachModalFocusTrap(modal, modalContent);
+
+    // Wire up share button
+    const shareBtn = modalBody.querySelector('.modal-share-btn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', () => copyShareLink(candidate));
+    }
 }
 
-function closeCandidateModal() {
+/**
+ * Open modal and update URL (used when user clicks on a candidate)
+ */
+function openCandidateModal(candidate, triggerElement) {
+    openCandidateModalCore(candidate, triggerElement);
+    updateUrlWithCandidate(candidate);
+}
+
+/**
+ * Open modal without updating URL (used for back/forward navigation)
+ */
+function openCandidateModalWithoutUrlUpdate(candidate) {
+    openCandidateModalCore(candidate, null);
+}
+
+/**
+ * Core modal closing logic
+ */
+function closeCandidateModalCore() {
     const modal = document.getElementById('candidate-modal');
     if (!modal) return;
-    
+
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = ''; // Restore body scrolling
@@ -874,6 +1002,47 @@ function closeCandidateModal() {
         lastFocusedElement.focus();
     }
     lastFocusedElement = null;
+}
+
+/**
+ * Close modal and update URL (used when user clicks close button)
+ */
+function closeCandidateModal() {
+    closeCandidateModalCore();
+    updateUrlWithCandidate(null);
+}
+
+/**
+ * Close modal without updating URL (used for back/forward navigation)
+ */
+function closeCandidateModalWithoutUrlUpdate() {
+    closeCandidateModalCore();
+}
+
+/**
+ * Copy shareable link to clipboard
+ */
+function copyShareLink(candidate) {
+    const slug = generateCandidateSlug(candidate);
+    if (!slug) return;
+
+    const shareUrl = `${window.location.origin}${window.location.pathname}#candidate/${slug}`;
+
+    navigator.clipboard.writeText(shareUrl).then(() => {
+        // Show feedback
+        const shareBtn = document.querySelector('.modal-share-btn');
+        if (shareBtn) {
+            const originalText = shareBtn.innerHTML;
+            shareBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"></polyline></svg> Link Copied!';
+            shareBtn.classList.add('copied');
+            setTimeout(() => {
+                shareBtn.innerHTML = originalText;
+                shareBtn.classList.remove('copied');
+            }, 2000);
+        }
+    }).catch(err => {
+        console.error('Failed to copy link:', err);
+    });
 }
 
 function buildModalContent(candidate) {
@@ -943,7 +1112,19 @@ function buildModalContent(candidate) {
                 <div class="modal-badge">${badgeText}</div>
             </div>
             <div class="modal-title-section">
-                <h2 class="modal-candidate-name">${candidate.name || 'Unknown'}</h2>
+                <div class="modal-title-row">
+                    <h2 class="modal-candidate-name">${candidate.name || 'Unknown'}</h2>
+                    <button class="modal-share-btn" aria-label="Copy shareable link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                        <span>Share</span>
+                    </button>
+                </div>
                 ${partyBadge || statusIndicator ? `<div class="modal-badges-row">${partyBadge}${statusIndicator}</div>` : ''}
                 ${metaInfo ? `<p class="modal-meta">${metaInfo}</p>` : ''}
             </div>
