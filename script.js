@@ -202,6 +202,40 @@ function escapeHTML(value) {
         .replaceAll("'", '&#39;');
 }
 
+// ===================================
+// Slug Generation for Candidate URLs
+// ===================================
+
+/**
+ * Generate a URL-friendly slug from candidate name and state
+ * e.g., "Fabian Doñate" + "NV" -> "fabian-donate-nv"
+ */
+function generateCandidateSlug(candidate) {
+    if (!candidate || !candidate.name) return null;
+
+    const namePart = candidate.name
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+        .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+        .trim()
+        .replace(/\s+/g, '-'); // Replace spaces with hyphens
+
+    const statePart = (candidate.state || '').toLowerCase();
+
+    return statePart ? `${namePart}-${statePart}` : namePart;
+}
+
+/**
+ * Navigate to candidate full page
+ */
+function navigateToCandidatePage(candidate) {
+    const slug = generateCandidateSlug(candidate);
+    if (slug) {
+        window.location.href = `/candidate/${slug}`;
+    }
+}
+
 // Fetch candidates from API
 async function loadCandidates() {
     try {
@@ -399,24 +433,24 @@ function createCandidateCard(candidate) {
         </div>
     `;
     
-    // Add click handler to open modal
+    // Add click handler to navigate to full page
     const viewDetailsBtn = card.querySelector('.btn-view-details');
     if (viewDetailsBtn) {
         viewDetailsBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            openCandidateModal(candidate, viewDetailsBtn);
+            navigateToCandidatePage(candidate);
         });
     }
-    
-    // Also make the card clickable (optional)
+
+    // Also make the card clickable
     card.style.cursor = 'pointer';
     card.addEventListener('click', (e) => {
-        // Don't open modal if clicking on links or buttons
+        // Don't navigate if clicking on links or buttons
         if (!e.target.closest('a') && !e.target.closest('button')) {
-            openCandidateModal(candidate, card);
+            navigateToCandidatePage(candidate);
         }
     });
-    
+
     return card;
 }
 
@@ -848,266 +882,6 @@ function showNotification(message) {
 }
 
 // ===================================
-// Candidate Modal
-// ===================================
-
-let currentCandidate = null;
-let lastFocusedElement = null;
-let modalTrapHandler = null;
-
-function setupModalListeners() {
-    const modal = document.getElementById('candidate-modal');
-    const modalOverlay = document.getElementById('modal-overlay');
-    const modalClose = document.getElementById('modal-close');
-    
-    if (!modal || !modalOverlay || !modalClose) return;
-    
-    // Close modal when clicking overlay
-    modalOverlay.addEventListener('click', closeCandidateModal);
-    
-    // Close modal when clicking close button
-    modalClose.addEventListener('click', closeCandidateModal);
-    
-    // Close modal on ESC key (and keep in sync with focus trap)
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeCandidateModal();
-        }
-    });
-}
-
-function getFocusableElements(container) {
-    if (!container) return [];
-    const focusableSelectors = [
-        'a[href]',
-        'button:not([disabled])',
-        'input:not([disabled])',
-        'select:not([disabled])',
-        'textarea:not([disabled])',
-        '[tabindex]:not([tabindex="-1"])'
-    ];
-    return Array.from(container.querySelectorAll(focusableSelectors.join(',')))
-        .filter((el) => !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length));
-}
-
-function attachModalFocusTrap(modal, modalContent) {
-    if (!modal || !modalContent) return;
-
-    if (modalTrapHandler) {
-        modal.removeEventListener('keydown', modalTrapHandler);
-    }
-
-    modalTrapHandler = (e) => {
-        if (e.key !== 'Tab') return;
-        if (!modal.classList.contains('active')) return;
-
-        const focusables = getFocusableElements(modalContent);
-        if (focusables.length === 0) return;
-
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-
-        if (e.shiftKey) {
-            if (document.activeElement === first || document.activeElement === modal) {
-                e.preventDefault();
-                last.focus();
-            }
-        } else {
-            if (document.activeElement === last) {
-                e.preventDefault();
-                first.focus();
-            }
-        }
-    };
-
-    modal.addEventListener('keydown', modalTrapHandler);
-}
-
-function openCandidateModal(candidate, triggerElement) {
-    currentCandidate = candidate;
-    const modal = document.getElementById('candidate-modal');
-    const modalBody = document.getElementById('modal-body');
-    const modalClose = document.getElementById('modal-close');
-    const modalContent = modal ? modal.querySelector('.modal-content') : null;
-    
-    if (!modal || !modalBody) return;
-
-    lastFocusedElement = triggerElement || document.activeElement;
-    
-    // Build full candidate details HTML
-    const modalHTML = buildModalContent(candidate);
-    modalBody.innerHTML = modalHTML;
-
-    // Wire aria-labelledby to the candidate name, for screen readers
-    const titleEl = modalBody.querySelector('.modal-candidate-name');
-    if (titleEl) {
-        titleEl.id = 'candidate-modal-title';
-        modal.setAttribute('aria-labelledby', 'candidate-modal-title');
-    } else {
-        modal.removeAttribute('aria-labelledby');
-    }
-    
-    // Show modal
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden'; // Prevent body scrolling
-
-    // Focus management + focus trap
-    if (modalClose) modalClose.focus();
-    attachModalFocusTrap(modal, modalContent);
-}
-
-function closeCandidateModal() {
-    const modal = document.getElementById('candidate-modal');
-    if (!modal) return;
-    
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = ''; // Restore body scrolling
-    currentCandidate = null;
-
-    // Remove focus trap listener
-    if (modalTrapHandler) {
-        modal.removeEventListener('keydown', modalTrapHandler);
-        modalTrapHandler = null;
-    }
-
-    // Restore focus to the element that launched the modal (keyboard UX)
-    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-        lastFocusedElement.focus();
-    }
-    lastFocusedElement = null;
-}
-
-function buildModalContent(candidate) {
-    // Get initials for photo placeholder (fallback)
-    const initials = candidate.name ? candidate.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() : '??';
-    
-    // Build photo HTML
-    const photoHTML = candidate.image_url && candidate.image_url.trim()
-        ? `<img src="${candidate.image_url}" alt="${candidate.name || 'Candidate'}" class="modal-candidate-image">`
-        : `<div class="modal-photo-placeholder">${initials}</div>`;
-    
-    // Format office type badge
-    let badgeText = candidate.office_type || 'Candidate';
-    if (candidate.office_level === 'federal') {
-        badgeText = 'U.S. Congress';
-    } else if (candidate.office_level === 'state') {
-        badgeText = candidate.office_type || 'State Office';
-    } else {
-        badgeText = candidate.office_type || 'Local Office';
-    }
-    
-    // Format position
-    const position = candidate.district 
-        ? `${candidate.state}-${candidate.district} ${badgeText}` 
-        : `${candidate.state} ${badgeText}`;
-    
-    // Build party badge
-    const partyBadge = candidate.party 
-        ? `<span class="party-badge party-${candidate.party.toLowerCase()}">${candidate.party}</span>`
-        : '';
-    
-    // Build status/incumbent indicator
-    const statusIndicator = candidate.is_incumbent 
-        ? `<span class="status-badge status-incumbent">Incumbent</span>`
-        : (candidate.status ? `<span class="status-badge">${candidate.status}</span>` : '');
-    
-    // Build age/heritage info
-    const ageInfo = candidate.age ? `<span>Age ${candidate.age}</span>` : '';
-    const heritageInfo = candidate.heritage ? `<span>${candidate.heritage}</span>` : '';
-    const metaInfo = [ageInfo, heritageInfo].filter(Boolean).join(' • ');
-    
-    // Parse all key issues (not just first 3)
-    const allIssues = candidate.key_issues ? candidate.key_issues.split(',').map(i => i.trim()) : [];
-    
-    // Build social links
-    const socialLinks = [];
-    if (candidate.twitter) {
-        const twitterHandle = candidate.twitter.replace('@', '');
-        socialLinks.push(`<a href="https://twitter.com/${twitterHandle}" target="_blank" rel="noopener noreferrer" class="social-link modal-social-link" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>`);
-    }
-    if (candidate.instagram) {
-        const instagramHandle = candidate.instagram.replace('@', '');
-        socialLinks.push(`<a href="https://instagram.com/${instagramHandle}" target="_blank" rel="noopener noreferrer" class="social-link modal-social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>`);
-    }
-    if (candidate.tiktok) {
-        const tiktokHandle = candidate.tiktok.replace('@', '');
-        socialLinks.push(`<a href="https://tiktok.com/@${tiktokHandle}" target="_blank" rel="noopener noreferrer" class="social-link modal-social-link" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"></path></svg></a>`);
-    }
-    if (candidate.facebook) {
-        socialLinks.push(`<a href="https://facebook.com/${candidate.facebook}" target="_blank" rel="noopener noreferrer" class="social-link modal-social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>`);
-    }
-    
-    return `
-        <div class="modal-header">
-            <div class="modal-photo-section">
-                ${photoHTML}
-                <div class="modal-badge">${badgeText}</div>
-            </div>
-            <div class="modal-title-section">
-                <h2 class="modal-candidate-name">${candidate.name || 'Unknown'}</h2>
-                ${partyBadge || statusIndicator ? `<div class="modal-badges-row">${partyBadge}${statusIndicator}</div>` : ''}
-                ${metaInfo ? `<p class="modal-meta">${metaInfo}</p>` : ''}
-            </div>
-        </div>
-        
-        <div class="modal-body-content">
-            <div class="modal-section">
-                <h3 class="modal-section-title">Campaign Information</h3>
-                <div class="modal-info-grid">
-                    ${candidate.state ? `<div class="modal-info-item"><strong>State:</strong> ${candidate.state}</div>` : ''}
-                    ${candidate.district ? `<div class="modal-info-item"><strong>District:</strong> ${candidate.district}</div>` : ''}
-                    ${candidate.office_level ? `<div class="modal-info-item"><strong>Office Level:</strong> <span class="text-capitalize">${candidate.office_level}</span></div>` : ''}
-                    ${candidate.office_type ? `<div class="modal-info-item"><strong>Office Type:</strong> ${candidate.office_type}</div>` : ''}
-                    ${candidate.party ? `<div class="modal-info-item"><strong>Party:</strong> ${candidate.party === 'D' ? 'Democratic' : candidate.party === 'R' ? 'Republican' : 'Independent'}</div>` : ''}
-                    ${candidate.is_incumbent !== undefined ? `<div class="modal-info-item"><strong>Incumbent:</strong> ${candidate.is_incumbent ? 'Yes' : 'No'}</div>` : ''}
-                    ${candidate.status ? `<div class="modal-info-item"><strong>Status:</strong> ${candidate.status}</div>` : ''}
-                </div>
-            </div>
-            
-            ${candidate.background ? `
-            <div class="modal-section">
-                <h3 class="modal-section-title">Background</h3>
-                <p class="modal-text">${candidate.background}</p>
-            </div>
-            ` : ''}
-            
-            ${candidate.notable_info ? `
-            <div class="modal-section">
-                <h3 class="modal-section-title">Notable Information</h3>
-                <p class="modal-text">${candidate.notable_info}</p>
-            </div>
-            ` : ''}
-            
-            ${allIssues.length > 0 ? `
-            <div class="modal-section">
-                <h3 class="modal-section-title">Key Issues</h3>
-                <div class="modal-issues">
-                    ${allIssues.map(issue => `<span class="modal-issue-tag">${issue}</span>`).join('')}
-                </div>
-            </div>
-            ` : ''}
-            
-            ${candidate.endorsements ? `
-            <div class="modal-section">
-                <h3 class="modal-section-title">Endorsements</h3>
-                <p class="modal-text">${candidate.endorsements}</p>
-            </div>
-            ` : ''}
-            
-            <div class="modal-section">
-                <h3 class="modal-section-title">Connect</h3>
-                <div class="modal-social-section">
-                    ${socialLinks.length > 0 ? `<div class="modal-social-links">${socialLinks.join('')}</div>` : '<p class="modal-text">No social media links available.</p>'}
-                    ${candidate.website ? `<a href="${candidate.website}" target="_blank" rel="noopener noreferrer" class="btn btn-primary modal-website-btn">Visit Campaign Website</a>` : ''}
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// ===================================
 // Initialize
 // ===================================
 
@@ -1120,9 +894,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load candidates from API
     renderSkeletonCandidates(6);
     loadCandidates();
-    
-    // Modal event listeners
-    setupModalListeners();
 });
 
 // ===================================
